@@ -58,7 +58,7 @@ speed_test_local() {
 }
 speed() {
     speed_test 'http://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.32.zip' 'Google'
-    speed_test 'http://mirrors.sohu.com/centos/7/os/x86_64/isolinux/upgrade.img' 'Sohu'
+    speed_test 'http://mirrors.sohu.com/centos/7/os/x86_64/isolinux/initrd.img' 'Sohu'
     speed_test 'http://mirrors.tuna.tsinghua.edu.cn/archlinuxarm/os/GoFlexRescue.zip' 'Tsinghua(Education network)'
 }
 
