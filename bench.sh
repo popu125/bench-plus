@@ -51,7 +51,7 @@ speed_test_v6() {
 
 speed_test_local() {
     wget http://sh.bobiji.com/localtest.py
-    python localtest.py
+    python localtest.py 
     localspeed=$(awk '{print 98304/$1}' .localtest)
     echo -e "Your local-to-server speed is \e[32m$localspeed\e[0m KB/S."
 }
@@ -67,7 +67,7 @@ speed_v6() {
 }
 
 io_test() {
-    (LANG=en_US dd if=/dev/zero of=/tmp/botest bs=32k count=3k ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//'
+    (LANG=en_US dd if=/dev/zero of=botest bs=32k count=3k ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//'
 }
 
 cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
@@ -119,4 +119,4 @@ else next
 fi
 echo ""
 
-rm -rf /tmp/botest
+rm -f botest localtest.py .localtest
