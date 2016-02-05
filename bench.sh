@@ -29,7 +29,7 @@ speed_test() {
         echo -e -n "\e[33m$2\e[0m\t\e[32m$ipaddress\e[0m\t\t"
     fi
     speedtest=$(wget -4O /dev/null -T300 $1 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}')
-    echo -e "\e[0m\t\t\e[31m$speedtest\e[0m"
+    echo -e "\e[31m$speedtest\e[0m"
 }
 
 speed_test_v6() {
@@ -47,7 +47,7 @@ speed_test_v6() {
         echo -e -n "\e[33m$2\e[0m\t\e[32m$ipaddress\e[0m\t\e[31m$speedtest\e[0m"
     fi
     speedtest=$(wget -6O /dev/null -T300 $1 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}')
-    echo -e "\e[0m\t\t\e[31m$speedtest\e[0m"
+    echo -e "\e[31m$speedtest\e[0m"
 
 }
 
