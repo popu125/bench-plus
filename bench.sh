@@ -54,9 +54,10 @@ speed_test_v6() {
 speed_test_local() {
     wget -q http://sh.bobiji.com/localtest.py
     serverip=$(wget -qO- ifconfig.co)
+    (dd if=/dev/zero of=botest bs=10m count=1 ) 2>&1
     echo "Please download file from http://$serverip:8000/botest."
     python localtest.py &> /dev/null
-    localspeed=$(awk '{print 98304/$1}' .localtest)
+    localspeed=$(awk '{print 10240/$1}' .localtest)
     echo -e "Your local-to-server speed is \e[32m$localspeed\e[0m KB/S."
 }
 speed() {
@@ -71,7 +72,7 @@ speed_v6() {
 }
 
 io_test() {
-    (LANG=en_US dd if=/dev/zero of=botest bs=32k count=3k ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//'
+    (LANG=en_US dd if=/dev/zero of=iotest bs=32k count=3k ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//'
 }
 
 cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
@@ -120,4 +121,4 @@ speed_test_local && next
 fi
 echo ""
 
-rm -f botest localtest.py .localtest
+rm -f iotest botest localtest.py .localtest
