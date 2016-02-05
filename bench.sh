@@ -115,7 +115,7 @@ fi
 io1=$( io_test )
 echo "I/O speed : $io1"
 next
-if [[ $1 == "L" ]];then
+if [[ $localTest == "Y" ]];then
 speed_test_local && next
 fi
 echo ""
