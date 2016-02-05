@@ -2,10 +2,9 @@
 #==============================================================#
 #   Description: bench test script                             #
 #   Author: Teddysun <i@teddysun.com>                          #
-#   Thanks: LookBack <admin@dwhd.org>                          #
-#   Visit:  https://teddysun.com                               #
+#   Modified by bobo <admin@boboweb.net>                       #
 #==============================================================#
-# Modified by bobo
+
 
 get_opsy() {
     [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
