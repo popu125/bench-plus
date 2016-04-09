@@ -14,7 +14,7 @@ echo -e "\n\033[32m===============Installtion start================\033[0m\n"
 
 # Install envs and supervisor
 echo -e "\033[32mInstalling envs\033[0m"
-(yum -y install git gcc make wget openssl screen python-setuptools && easy_install pip && pip install supervisor) &>/dev/null
+(yum -y install git gcc make wget openssl screen python-setuptools && easy_install supervisor meld3) &>/dev/null
 (apt-get install -y python-pip git gcc make wget openssl screen && pip install supervisor) &>/dev/null
 
 # Install Golang
