@@ -61,14 +61,14 @@ speed_test_local() {
     echo -e "Your local-to-server speed is \e[32m$localspeed\e[0m KB/S."
 }
 speed() {
-    speed_test 'http://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.32.zip' 'Google'
-    speed_test 'http://mirrors.sohu.com/centos/7/os/x86_64/isolinux/initrd.img' 'Sohu'
-    speed_test 'http://mirrors.tuna.tsinghua.edu.cn/centos/7/os/x86_64/isolinux/upgrade.img' 'Tsinghua(Education network)'
+    speed_test 'http://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.37.zip' 'Google'
+    speed_test 'http://mirrors.aliyun.com/centos/7/os/x86_64/isolinux/initrd.img' 'Aliyun'
+    speed_test 'http://mirrors.tuna.tsinghua.edu.cn/centos/7/os/x86_64/isolinux/upgrade.img' 'Tsinghua(EduNet)'
 }
 
 speed_v6() {
-    speed_test_v6 'http://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.32.zip' 'Google'
-    speed_test_v6 'http://mirrors.tuna.tsinghua.edu.cn/centos/7/os/x86_64/isolinux/upgrade.img' 'Tsinghua(Education network)'
+    speed_test_v6 'https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.37.zip' 'Google'
+    speed_test_v6 'http://mirrors.tuna.tsinghua.edu.cn/centos/7/os/x86_64/isolinux/upgrade.img' 'Tsinghua(EduNet)'
 }
 
 io_test() {
