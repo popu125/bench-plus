@@ -63,12 +63,12 @@ speed_test_local() {
 speed() {
     speed_test 'http://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.37.zip' 'Google'
     speed_test 'http://mirrors.aliyun.com/centos/7/os/x86_64/isolinux/initrd.img' 'Aliyun'
-    speed_test 'http://mirrors.tuna.tsinghua.edu.cn/centos/7/os/x86_64/isolinux/upgrade.img' 'Tsinghua(EduNet)'
+    speed_test 'https://mirrors.tuna.tsinghua.edu.cn/centos/7/os/x86_64/isolinux/initrd.img' 'Tsinghua(EduNet)'
 }
 
 speed_v6() {
     speed_test_v6 'https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.37.zip' 'Google'
-    speed_test_v6 'http://mirrors.tuna.tsinghua.edu.cn/centos/7/os/x86_64/isolinux/upgrade.img' 'Tsinghua(EduNet)'
+    speed_test_v6 'https://mirrors.tuna.tsinghua.edu.cn/centos/7/os/x86_64/isolinux/initrd.img' 'Tsinghua(EduNet)'
 }
 
 io_test() {
