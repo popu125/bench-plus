@@ -43,4 +43,5 @@ sed -i "s/YOUR_PW/${rand_str}/" config.go
 
 
 msg "Building Your Ransom"
+go get .
 make
