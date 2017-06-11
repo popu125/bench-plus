@@ -13,7 +13,6 @@ import (
 	"reflect"
 	"crypto/des"
 	"encoding/base64"
-	"io/ioutil"
 )
 
 func main() {
@@ -40,7 +39,7 @@ func main() {
 		var input string
 		fmt.Println("Enter your", q)
 		fmt.Scan(&input)
-		reflect.ValueOf(&conf).Elem().FieldByName(key).SetSting(input)
+		reflect.ValueOf(&conf).Elem().FieldByName(key).SetString(input)
 	}
 	fmt.Println("Do you want to skip hidden file? (For windows only) (Y/N)")
 Loop:
