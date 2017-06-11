@@ -13,6 +13,7 @@ import (
 	"reflect"
 	"crypto/des"
 	"encoding/base64"
+	"io/ioutil"
 )
 
 func main() {
@@ -66,7 +67,7 @@ Loop:
 	// Write Encrypted data to file
 	bE := base64.StdEncoding
 	target := bE.EncodeToString(data)
-	print(target)
+	ioutil.WriteFile("data.enc", []byte(target), 0)
 }
 
 // Key Pair Gen Funcs
