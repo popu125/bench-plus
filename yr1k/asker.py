@@ -16,6 +16,6 @@ for k, q in no.items():
     print("Enter your " + q + ":",end="")
     tmp = input()
     print()
-    arg += "-" + k + " " + tmp + " "
+    arg += "-" + k + " \"" + tmp + "\" "
 
 print(arg, file=sys.stderr)

