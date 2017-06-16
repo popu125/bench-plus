@@ -36,7 +36,7 @@ func main() {
 		argDict[key] = flag.String(key, "", q)
 	}
 	flag.Parse()
-	if len(os.Args) != 9{
+	if len(os.Args) == 0{
 		flag.Usage()
 		return
 	}
