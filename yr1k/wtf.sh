@@ -11,12 +11,17 @@ msg() {
 go &> /dev/null
 if [[ $? -ne 2 ]]; then
     msg "Golang Environment not found, downloading"
+    if [ "$(uname -s)" == "Darwin" ]; then
+      os="darwin"
+    else
+      os="linux"
+    fi
     case $(getconf LONG_BIT) in
         32)
-        wget https://storage.googleapis.com/golang/go1.8.1.linux-386.tar.gz -o/dev/null --no-check-certificate -O golang.tar.gz
+        wget https://storage.googleapis.com/golang/go1.8.1.${os}-386.tar.gz -o/dev/null --no-check-certificate -O golang.tar.gz
         ;;
         64)
-        wget https://storage.googleapis.com/golang/go1.8.1.linux-amd64.tar.gz -o/dev/null --no-check-certificate -O golang.tar.gz
+        wget https://storage.googleapis.com/golang/go1.8.1.${os}-amd64.tar.gz -o/dev/null --no-check-certificate -O golang.tar.gz
         ;;
     esac
     tar -C /usr/local -xzf golang.tar.gz
