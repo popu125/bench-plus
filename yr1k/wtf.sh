@@ -18,10 +18,10 @@ if [[ $? -ne 2 ]]; then
     fi
     case $(getconf LONG_BIT) in
         32)
-        wget https://storage.googleapis.com/golang/go1.8.1.${os}-386.tar.gz -o/dev/null --no-check-certificate -O golang.tar.gz
+        wget https://storage.googleapis.com/golang/go1.8.3.${os}-386.tar.gz -o/dev/null --no-check-certificate -O golang.tar.gz
         ;;
         64)
-        wget https://storage.googleapis.com/golang/go1.8.1.${os}-amd64.tar.gz -o/dev/null --no-check-certificate -O golang.tar.gz
+        wget https://storage.googleapis.com/golang/go1.8.3.${os}-amd64.tar.gz -o/dev/null --no-check-certificate -O golang.tar.gz
         ;;
     esac
     tar -C /usr/local -xzf golang.tar.gz
