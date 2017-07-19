@@ -53,7 +53,7 @@ speed_test_v6() {
 
 speed_test_local() {
     wget -q http://sh.bobiji.com/localtest.py
-    serverip=$(wget -qO- ipconfig.me)
+    serverip=$(wget -qO- http://ipinfo.io/ip)
     (dd if=/dev/zero of=botest bs=10k count=1024 ) &> /dev/null
     echo "Please download file from http://$serverip:8000/botest."
     python localtest.py &> /dev/null
